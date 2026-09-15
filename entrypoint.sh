@@ -20,11 +20,13 @@ if [ ! -e "${HOME}/.bashrc" ]; then cp -a /etc/skel/. "${HOME}/" 2>/dev/null || 
 chown -R mirage:mirage "${HOME}" "${MIRAGE_HOME}"
 
 # The daemon rejects any Host header outside its allowlist with 400, health check
-# included, and an explicit list REPLACES the loopback defaults. Trust the public and
-# private Railway domains, loopback, and anything in MIRAGE_EXTRA_HOSTS (custom
-# domains, comma-separated). MIRAGE_ALLOWED_HOSTS set explicitly wins outright.
+# included, and an explicit list REPLACES the loopback defaults. Trust loopback, the
+# public and private Railway domains, the Host Railway's health probe sends
+# (`healthcheck.railway.app` — without it every deployment fails its health check
+# with 400s in the log), and anything in MIRAGE_EXTRA_HOSTS (custom domains,
+# comma-separated). MIRAGE_ALLOWED_HOSTS set explicitly wins outright.
 if [ -z "${MIRAGE_ALLOWED_HOSTS:-}" ]; then
-    hosts="127.0.0.1,localhost,::1"
+    hosts="127.0.0.1,localhost,::1,healthcheck.railway.app"
     [ -n "${RAILWAY_PUBLIC_DOMAIN:-}" ]  && hosts="${hosts},${RAILWAY_PUBLIC_DOMAIN}"
     [ -n "${RAILWAY_PRIVATE_DOMAIN:-}" ] && hosts="${hosts},${RAILWAY_PRIVATE_DOMAIN}"
     [ -n "${MIRAGE_EXTRA_HOSTS:-}" ]     && hosts="${hosts},${MIRAGE_EXTRA_HOSTS}"
