@@ -49,11 +49,11 @@ unprivileged user. The daemon binds loopback and a `socat` relay exposes it dual
 service port, so both the public edge and `mirage.railway.internal` reach it.
 
 **Authentication** is upstream's token mode: every route except health requires
-`Authorization: Bearer <MIRAGE_AUTH_TOKEN>`; the token is generated per deployment and readable
+`Authorization: Bearer YOUR-MIRAGE-AUTH-TOKEN`; the token is generated per deployment and readable
 from the service's variables. The entrypoint refuses to start without one.
 
 **First run:** install the CLI (`pip install mirage-ai==0.0.6` or
-`npm i -g @struktoai/mirage-cli`), point it at the service (`mirage config set url https://<domain>`,
+`npm i -g @struktoai/mirage-cli`), point it at the service (`mirage config set url https://YOUR-DOMAIN`,
 `export MIRAGE_TOKEN=…`), create a workspace from a YAML config and start executing. Use
 `mode: exec` on a mount if the agent should run `python` or `node` scripts.
 
