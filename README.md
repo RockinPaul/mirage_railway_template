@@ -12,7 +12,7 @@ one bearer token.
 
 | Service | Runs | Public | Role |
 |---|---|---|---|
-| `mirage` | `mirage-ai` 0.0.6 on `python:3.12-slim`, socat relay, quickjs-ng 0.16.2 | **yes** | The daemon: workspaces, sessions, execute, jobs, versions — `/v1/*`. Data on `/data`. |
+| `mirage` | `mirage-ai` 0.0.6 on `python:3.12-slim`, socat relay, quickjs-ng 0.18.0 | **yes** | The daemon: workspaces, sessions, execute, jobs, versions — `/v1/*`. Data on `/data`. |
 
 One service. The daemon speaks plain HTTP, so Railway's edge reaches it directly; the only extra
 process is a `socat` relay that gives it a dual-stack listener (see below).

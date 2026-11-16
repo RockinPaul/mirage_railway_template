@@ -28,8 +28,8 @@ RUN pip install --no-cache-dir "mirage-ai[${MIRAGE_EXTRAS}]==${MIRAGE_VERSION}" 
 # in-process on wasmtime. The package does not ship the module; without it every
 # `node` line fails with "the quickjs runtime needs a qjs-wasi.wasm module". Pinned
 # and digest-checked here, and pointed at with MIRAGE_QUICKJS_HOME below.
-ARG QJS_VERSION=v0.16.2
-ARG QJS_SHA256=d2939e98c808e8b9f4164cd0d7b0398cbc0121ddf52862bcd92157d923e461cc
+ARG QJS_VERSION=v0.18.0
+ARG QJS_SHA256=2c218412cb8b17e46ee91bea7556ec38f5b9b6bd6312fddd3ceeed14aa71eaaa
 RUN set -eux; mkdir -p /opt/quickjs; \
     curl -fsSL -o /opt/quickjs/qjs-wasi.wasm \
         "https://github.com/quickjs-ng/quickjs/releases/download/${QJS_VERSION}/qjs-wasi.wasm"; \

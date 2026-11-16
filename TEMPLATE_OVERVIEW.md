@@ -43,7 +43,7 @@ volume.
 
 One service, `mirage`: `python:3.12-slim` with `mirage-ai` 0.0.6 installed with its storage, data
 and messaging backends and the Monty (Python) and quickjs (JavaScript) runtimes; the quickjs-ng
-0.16.2 WASI module pinned by digest. Health check `/v1/health`, which the daemon leaves open for
+0.18.0 WASI module pinned by digest. Health check `/v1/health`, which the daemon leaves open for
 probes. Volume at `/data` holding the daemon home (`state/`, `repos/`, `snapshots/`). Runs as an
 unprivileged user. The daemon binds loopback and a `socat` relay exposes it dual-stack on the
 service port, so both the public edge and `mirage.railway.internal` reach it.
