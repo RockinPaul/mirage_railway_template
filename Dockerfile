@@ -3,10 +3,10 @@
 # Upstream publishes the daemon as a Python package, not a container image; its only
 # Dockerfile is a FUSE sandbox host that needs SYS_ADMIN and /dev/fuse, which Railway
 # does not grant and the daemon does not need. This installs the package at a pinned
-# version with the mountable backends and the in-process script runtimes.
+# version with the mountable backends and the Monty/QuickJS script runtimes.
 FROM python:3.12-slim
 
-ARG MIRAGE_VERSION=0.0.6
+ARG MIRAGE_VERSION=0.0.8
 # Storage, data and messaging backends a workspace can mount, the Python (Monty) and
 # JavaScript (QuickJS) runtimes for `python`/`node` inside the virtual shell, and the
 # secret sources. Deliberately excluded: agent frameworks (the daemon serves agents, it
@@ -41,7 +41,7 @@ RUN set -eux; mkdir -p /opt/quickjs; \
 RUN useradd -u 1000 -d /data/home -M -s /bin/bash mirage
 
 # Constants are baked so no service variable can be nulled into a required composer
-# field. The daemon's data root (state/, repos/, snapshots/) is MIRAGE_HOME, on the
+# field. The daemon's default disk state store is under MIRAGE_HOME/state, on the
 # volume. The idle grace is ten years: the daemon SIGTERMs itself that long after its
 # last workspace is removed, and a value of 0 means "exit immediately", so there is no
 # way to disable it outright.
