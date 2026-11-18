@@ -91,7 +91,7 @@ mirage shell -w restored -c 'cat /hi.txt'
   can call `http://mirage.railway.internal:8080`.
 - **It exits when idle — so the grace is ten years.** The daemon SIGTERMs itself
   `MIRAGE_IDLE_GRACE_SECONDS` after its last workspace is removed (exit 143), and `0` means
-  "exit immediately", so it cannot be switched off. `railway.json` also sets the restart policy
+  "exit immediately", so it cannot be switched off. The template also sets the restart policy
   to `ALWAYS`. If you shorten the grace, expect a cold restart every time the workspace count
   drops to zero.
 - **What persists.** The daemon supplies a disk state store under `MIRAGE_HOME/state` unless
@@ -130,7 +130,6 @@ runtime plumbing are all young. quickjs-ng: bump `QJS_VERSION` and its digest.
 ```
 Dockerfile       python:3.12-slim + mirage-ai[backends,runtimes] + socat + quickjs wasm
 entrypoint.sh    fail-closed token check, volume prep, host allowlist, socat relay, gosu → uvicorn
-railway.json     health check /v1/health, restart policy ALWAYS
 ```
 
 ## Licences
